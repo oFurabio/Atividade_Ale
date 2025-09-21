@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= titulo %>
+    </title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #e3f2fd;
+        }
+
+        .calculadora {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            background: #2196F3;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+        }
+
+        button:hover {
+            background: #1976D2;
+        }
+
+        .resultado {
+            background: #e8f5e8;
+            border: 2px solid #4caf50;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .erro {
+            background: #ffebee;
+            border: 2px solid #f44336;
+        }
+
+        .historico {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        .operacao {
+            background: white;
+            padding: 8px;
+            margin: 5px 0;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="calculadora">
+        <h1>
+            <%= titulo %>
+        </h1>
+
+        <% if (resultado) { %>
+            <div class="resultado <%= resultado.sucesso ? '' : 'erro' %>">
+                <% if (resultado.sucesso) { %>
+                    <h2>Resultado: <%= resultado.valor %>
+                    </h2>
+                    <p>
+                        <%= resultado.operacao %>
+                    </p>
+                    <% } else { %>
+                        <h2>Erro!</h2>
+                        <p>
+                            <%= resultado.erro %>
+                        </p>
+                        <% } %>
+            </div>
+            <% } %>
+
+                <form method="POST" action="/calcular">
+                    <div class="form-group">
+                        <label for="num1">Primeiro número:</label>
+                        <input type="number" id="num1" name="num1" step="any" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="operador">Operação:</label>
+                        <select id="operador" name="operador" required>
+                            <option value="+">Adição (+)</option>
+                            <option value="-">Subtração (-)</option>
+                            <option value="*">Multiplicação (×)</option>
+                            <option value="/">Divisão (÷)</option>
+                            <option value="^">Potência (^)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="num2">Segundo número:</label>
+                        <input type="number" id="num2" name="num2" step="any" required>
+                    </div>
+
+                    <button type="submit">Calcular</button>
+                    <button type="submit" name="acao" value="zerar">Zerar</button>
+
+                    <div style="margin-top: 20px;">
+                        <label>
+                            <input type="checkbox" name="mostrar_historico" value="sim" <%=mostrarHistorico ? 'checked'
+                                : '' %>>
+                            Mostrar histórico de operações
+                        </label>
+                    </div>
+                </form>
+
+                <% if (mostrarHistorico && historico.length> 0) { %>
+                    <div class="historico">
+                        <h3>Histórico de Operações</h3>
+                        <% historico.forEach(op=> { %>
+                            <div class="operacao">
+                                <strong>
+                                    <%= op.operacao %>
+                                </strong> - <em>
+                                    <%= op.timestamp %>
+                                </em>
+                            </div>
+                            <% }); %>
+                    </div>
+                    <% } %>
+
+                        <p><a href="http://localhost:3000">← Voltar ao início</a></p>
+    </div>
+</body>
+
+</html>

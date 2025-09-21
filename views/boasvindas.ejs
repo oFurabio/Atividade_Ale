@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= titulo %>
+    </title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .welcome {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="welcome">
+        <h1>Olá, <%= nome %>! 👋</h1>
+        <p>É um prazer ter você aqui!</p>
+        <% if (nome==='NOME' ) { %>
+            <p>Experimente colocar seu nome na URL após boasvindas/</p>
+            <% } %>
+                <a href="/" style="color: #fff; text-decoration: underline;">Voltar ao início</a>
+    </div>
+</body>
+
+</html>

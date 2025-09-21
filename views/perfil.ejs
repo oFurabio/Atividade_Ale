@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= titulo %>
+    </title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f0f2f5;
+        }
+
+        .perfil {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            border-bottom: 2px solid #eee;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+
+        .info-group {
+            margin-bottom: 20px;
+        }
+
+        .info-group h3 {
+            color: #333;
+            border-left: 4px solid #007bff;
+            padding-left: 10px;
+        }
+
+        .especialidade {
+            background: #007bff;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            margin: 2px;
+            display: inline-block;
+        }
+
+        .experiencia {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="perfil">
+        <div class="header">
+            <h1>
+                <%= titulo %>
+            </h1>
+            <h2>
+                <%= dados.nome %>
+            </h2>
+        </div>
+
+        <div class="info-group">
+            <h3>Informações Pessoais</h3>
+            <p><strong>Idade:</strong>
+                <%= dados.idade %> anos
+            </p>
+            <p><strong>Endereço:</strong>
+                <%= dados.endereco %>
+            </p>
+            <p><strong>Telefone:</strong>
+                <%= dados.telefone %>
+            </p>
+            <p><strong>Email:</strong>
+                <%= dados.email %>
+            </p>
+        </div>
+
+        <div class="info-group">
+            <h3>Especialidades</h3>
+            <% dados.especialidades.forEach(especialidade=> { %>
+                <span class="especialidade">
+                    <%= especialidade %>
+                </span>
+                <% }); %>
+        </div>
+
+        <div class="info-group">
+            <h3>Experiência Profissional</h3>
+            <% dados.experiencia.forEach(exp=> { %>
+                <div class="experiencia">
+                    <strong>
+                        <%= exp.cargo %>
+                    </strong> - <%= exp.empresa %><br>
+                        <em>
+                            <%= exp.periodo %>
+                        </em>
+                </div>
+                <% }); %>
+        </div>
+
+        <a href="/">← Voltar ao início</a>
+    </div>
+</body>
+
+</html>
